@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  able-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Database=mydb;Username=postgres;Password=mysecretpassword"
+      ASPNETCORE_URLS: "http://+:5000"
+volumes:
+  pgdata:
