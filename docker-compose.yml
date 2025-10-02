@@ -11,13 +11,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
-      - "5001:5001"
     depends_on:
       - db
     environment:
       ConnectionStrings__DefaultConnection: "Host=db;Database=mydb;Username=postgres;Password=mysecretpassword"
-      ASPNETCORE_URLS: "http://+:5000"
+      PORT: 5000
+      ASPNETCORE_URLS: "http://+:${PORT}"
 volumes:
   pgdata:
