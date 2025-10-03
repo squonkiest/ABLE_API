@@ -20,7 +20,7 @@ namespace ABLE_API
 
             var app = builder.Build();
 
-            app.UseCors(opt => opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://dorume.site"));
+            app.UseCors(opt => opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://dorume.site"));
             // Configure the HTTP request pipeline.
 
             app.UseHttpsRedirection();
